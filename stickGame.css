@@ -9,11 +9,13 @@
 #player
 {
   position: absolute;
-  width: 100px;
-  height: 150px;
+  width: 70px;
+  height: 120px;
   background-color: black;
   background: url(images/stickRight.png) no-repeat center center;
-  background-size: contain;
+  background-size: 100%;
+  /*background-size: cover;*/
+  /*background-size: contain;*/
 }
 #test
 {
