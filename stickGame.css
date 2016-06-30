@@ -1,30 +1,19 @@
-#block
+#gameScreen
 {
-  width: 200px;
-  height: 150px;
-  background-color: black;
-  /*width: 50px;*/
-  /*height: 80px;*/
-  /*background: url(images/knightRight.png) no-repeat center center;*/
-  /*background: url(images/stickRight.png) no-repeat center center;*/
-  background: url(images/stick.png) no-repeat center center;
-  background-size: contain;
+  position: relative;
+  margin: auto;
+  width: 1000px;
+  height: 500px;
+  background-color: blue;
 }
-#health
-{
-  width: 50px;
-  height: 10px;
-  background-color: red;
-  margin-bottom: 5px;
-}
-#line
+#player
 {
   position: absolute;
-  height: 5px;
-  width: 100vw;
-  bottom: 9vh;
-  left: 0;
+  width: 100px;
+  height: 150px;
   background-color: black;
+  background: url(images/stickRight.png) no-repeat center center;
+  background-size: contain;
 }
 #test
 {
