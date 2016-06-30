@@ -3,6 +3,7 @@ $(document).ready(function()
 {
   // var gameScreen = $("#gameScreen").get(0).getBoundingClientRect();
   var gameScreen = $("#gameScreen");
+  var gameScreenPosition = gameScreen.get(0).getBoundingClientRect();
   var player = $("#player");
   var playerPosition = player.get(0).getBoundingClientRect();
   var moveRight = true;
@@ -14,8 +15,6 @@ $(document).ready(function()
   var hor = 0;
   var lowest = 380;
   var vert = lowest;
-  // var lowestShoot = lowest-10;
-  // var vertShoot = lowestShoot;
   var intRight;
   var intLeft;
   var intShoot;
@@ -139,8 +138,9 @@ $(document).ready(function()
       // console.log("shoot");
       shoot = false;
       var bullet = $("<div></div>")
-      bullet.width("10px");
-      bullet.height("10px");
+      bullet.width("5px");
+      bullet.height("5px");
+      bullet.css("border-radius","50%");
       bullet.css("background-color", "black");
       bullet.css("position", "absolute");
       bullet.css("top", (vert+60)+"px");
@@ -151,14 +151,36 @@ $(document).ready(function()
       }
       else if (moveLeft)
       {
-        bullet.css("left", hor+"px");
+        var bHor = hor;
+        bullet.css("left", bHor+"px");
       }
       gameScreen.append(bullet);
-      // intShoot = setInterval(function()
-      // {
-      //   hor -= 1;
-      //   player.css("marginLeft", hor+"px");
-      // }, shootSpeed);
+      // var move = bHor;
+      if (moveRight)
+      {
+        intShoot = setInterval(function()
+        {
+          bHor += 5;
+          bullet.css("left", bHor+"px");
+          if (bHor > 1000)
+          {
+            bullet.remove();
+          }
+        }, 1);
+      }
+      else if (moveLeft)
+      {
+        console.log("here");
+        intShoot = setInterval(function()
+        {
+          bHor -= 5;
+          bullet.css("left", bHor+"px");
+          if (bHor < -3)
+          {
+            bullet.remove();
+          }
+        }, 1);
+      }
     }
   }).keyup(function(e)
   {

@@ -1,10 +1,14 @@
+body
+{
+  background-color: black;
+}
 #gameScreen
 {
   position: relative;
   margin: auto;
   width: 1000px;
   height: 500px;
-  background-color: blue;
+  background-color: white;
 }
 #player
 {
