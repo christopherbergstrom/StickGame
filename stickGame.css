@@ -1,0 +1,37 @@
+#block
+{
+  width: 200px;
+  height: 150px;
+  background-color: black;
+  /*width: 50px;*/
+  /*height: 80px;*/
+  /*background: url(images/knightRight.png) no-repeat center center;*/
+  /*background: url(images/stickRight.png) no-repeat center center;*/
+  background: url(images/stick.png) no-repeat center center;
+  background-size: contain;
+}
+#health
+{
+  width: 50px;
+  height: 10px;
+  background-color: red;
+  margin-bottom: 5px;
+}
+#line
+{
+  position: absolute;
+  height: 5px;
+  width: 100vw;
+  bottom: 9vh;
+  left: 0;
+  background-color: black;
+}
+#test
+{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin-left: 96px;
+  /*margin-top: 303px;*/
+  background-color: black;
+}
