@@ -1,7 +1,6 @@
 var down = [];
 $(document).ready(function()
 {
-  // var gameScreen = $("#gameScreen").get(0).getBoundingClientRect();
   var gameScreen = $("#gameScreen");
   var gameScreenPosition = gameScreen.get(0).getBoundingClientRect();
   var player = $("#player");
@@ -31,8 +30,6 @@ $(document).ready(function()
       right = false;
       moveRight = true;
       moveLeft = false;
-      // console.log("right: "+moveRight);
-      // console.log("left: "+moveLeft);
       player.css("background-image", "url(images/stickRight.png)");
       intRight = setInterval(function()
       {
@@ -52,8 +49,6 @@ $(document).ready(function()
       left = false;
       moveRight = false;
       moveLeft = true;
-      // console.log("right: "+moveRight);
-      // console.log("left: "+moveLeft);
       player.css("background-image", "url(images/stickLeft.png)");
       intLeft = setInterval(function()
       {
@@ -135,7 +130,7 @@ $(document).ready(function()
     // shoot
     if (down[32] && shoot)
     {
-      // console.log("shoot");
+      console.log("shoot1");
       shoot = false;
       var bullet = $("<div></div>")
       bullet.width("5px");
@@ -151,14 +146,14 @@ $(document).ready(function()
       }
       else if (moveLeft)
       {
-        var bHor = hor;
+        var bHor = (hor-5);
         bullet.css("left", bHor+"px");
       }
       gameScreen.append(bullet);
       // var move = bHor;
       if (moveRight)
       {
-        intShoot = setInterval(function()
+        var intShooting = setInterval(function()
         {
           bHor += 5;
           bullet.css("left", bHor+"px");
@@ -171,7 +166,7 @@ $(document).ready(function()
       else if (moveLeft)
       {
         console.log("here");
-        intShoot = setInterval(function()
+        var intShooting = setInterval(function()
         {
           bHor -= 5;
           bullet.css("left", bHor+"px");
@@ -181,57 +176,66 @@ $(document).ready(function()
           }
         }, 1);
       }
+
+      intShoot = setInterval(function()
+      {
+        console.log("shoot2");
+        var bullet = $("<div></div>")
+        bullet.width("5px");
+        bullet.height("5px");
+        bullet.css("border-radius","50%");
+        bullet.css("background-color", "black");
+        bullet.css("position", "absolute");
+        bullet.css("top", (vert+60)+"px");
+        if (moveRight)
+        {
+          var bHor = (hor+70);
+          bullet.css("left", bHor+"px");
+        }
+        else if (moveLeft)
+        {
+          var bHor = (hor-5);
+          bullet.css("left", bHor+"px");
+        }
+        gameScreen.append(bullet);
+        // var move = bHor;
+        if (moveRight)
+        {
+          var intShooting = setInterval(function()
+          {
+            bHor += 5;
+            bullet.css("left", bHor+"px");
+            if (bHor > 1000)
+            {
+              bullet.remove();
+            }
+          }, 1);
+        }
+        else if (moveLeft)
+        {
+          console.log("here");
+          var intShooting = setInterval(function()
+          {
+            bHor -= 5;
+            bullet.css("left", bHor+"px");
+            if (bHor < -3)
+            {
+              bullet.remove();
+            }
+          }, 1);
+        }
+      }, shootSpeed);
     }
   }).keyup(function(e)
   {
     down[e.which] = false;
     if (e.which == 32)
     {
-      shoot = true;
-      // console.log("right: "+moveRight);
-      // console.log("left: "+moveLeft);
-      // if (moveRight)
-      // {
-      //   // player.css("transition", ".25s")
-      //   player.css("background-image", "url(images/stick.png)")
-      //   console.log("attack!");
-      //   var wait = setTimeout(function()
-      //   {
-      //     // player.css("transition", ".25s")
-      //     // player.css("background-image", "url(images/stickRightAttack.png)")
-      //     if (moveRight)
-      //     {
-      //       // player.css("background-image", "url(images/stickRight.png)")
-      //       player.css("background-image", "url(images/stick.png)")
-      //     }
-      //     else if (moveLeft)
-      //     {
-      //       // player.css("background-image", "url(images/StickLeft.png)")
-      //       player.css("background-image", "url(images/stick.png)")
-      //     }
-      //   }, 250);
-      // }
-      // else if (moveLeft)
-      // {
-      //   // player.css("transition", ".25s")
-      //   // player.css("background-image", "url(images/stickLeftAttack.png)")
-      //   player.css("background-image", "url(images/stick.png)")
-      //   console.log("attack!");
-      //   var wait = setTimeout(function()
-      //   {
-      //     // player.css("transition", ".25s")
-      //     if (moveRight)
-      //     {
-      //       // player.css("background-image", "url(images/stickRight.png)")
-      //       player.css("background-image", "url(images/stick.png)")
-      //     }
-      //     else if (moveLeft)
-      //     {
-      //       // player.css("background-image", "url(images/StickLeft.png)")
-      //       player.css("background-image", "url(images/stick.png)")
-      //     }
-      //   }, 250);
-      // }
+      if (intShoot)
+      {
+        clearInterval(intShoot);
+        shoot = true;
+      }
     }
     if (e.which == 37 || e.which == 38 || e.which == 39)
     {
