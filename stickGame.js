@@ -22,36 +22,31 @@ function collision($div1, $div2)
 window.setInterval(function()
 {
   // $('#result').text(collision($('#enemy'), $('.bullet')));
-  var test = $(".bullet")
-  if (test.length)
+  var bullet = $(".bullet")
+  // tests if a bullet is on the screen
+  if (bullet.length)
   {
+    // runs this loop for each bullet for each enemy
+    // if bullet hits enemy, enemy is damaged and bullet is removed
     $(".bullet").each(function()
     {
       var hit = false;
       $(".enemy").each(function()
       {
-        // console.log(collision($(this), $('.bullet')));
-        // var x = collision($(this), $('.bullet'));
-        var x = collision($(this), test);
+        var x = collision($(this), bullet);
         if (x)
         {
           hit = true;
-          // console.log($(this));
-          // console.log($(this).children(".enemyLife"));
           $(this).children(".enemyLife").width("-=10px");
           if (!$(this).children(".enemyLife").width())
           {
-            // $(this).effect("explode");
             $(this).children(".enemyImage").css("background-image", "url(images/explosion.png)");
-            $(this).children(".enemyImage").css("background-size", "100%");
-            // console.log("1");
+            $(this).children(".enemyImage").css("background-size", "180%");
             var me = $(this);
             var wait = setTimeout(function()
             {
-              // console.log("2");
               me.remove();
-            }, 100);
-            // console.log("3");
+            }, 200);
           }
         }
       });
@@ -66,10 +61,6 @@ window.setInterval(function()
 
 $(document).ready(function()
 {
-  // var enemy1 = {enemy:$("#enemy1"), life:$("#enemy1Life")};
-  // var enemy2 = {enemy:$("#enemy2"), life:$("#enemy2Life")};
-  // enemies.push(enemy1);
-  // enemies.push(enemy2);
   var gameScreen = $("#gameScreen");
   var gameScreenPosition = gameScreen.get(0).getBoundingClientRect();
   var player = $("#player");
@@ -86,9 +77,8 @@ $(document).ready(function()
   var intRight;
   var intLeft;
   var intShoot;
-  var shootSpeed = 50;
+  var shootSpeed = 500;
   player.css("top", vert+"px");
-  // $("#enemy").draggable();
   $(document).keydown(function(e)
   {
     down[e.which] = true;
@@ -200,7 +190,8 @@ $(document).ready(function()
     // shoot
     if (down[32] && shoot)
     {
-      // console.log("shoot1");
+      // console.log("shoot");
+      // click space bar
       shoot = false;
       var bullet = $("<div></div>");
       bullet.addClass("bullet");
@@ -221,7 +212,6 @@ $(document).ready(function()
         bullet.css("left", bHor+"px");
       }
       gameScreen.append(bullet);
-      // var move = bHor;
       if (moveRight)
       {
         var intShooting = setInterval(function()
@@ -249,9 +239,9 @@ $(document).ready(function()
         }, 1);
       }
 
+      // hold space bar
       intShoot = setInterval(function()
       {
-        // console.log("shoot2");
         var bullet = $("<div></div>");
         bullet.addClass("bullet");
         bullet.width("5px");
@@ -271,7 +261,6 @@ $(document).ready(function()
           bullet.css("left", bHor+"px");
         }
         gameScreen.append(bullet);
-        // var move = bHor;
         if (moveRight)
         {
           var intShooting = setInterval(function()
