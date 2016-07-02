@@ -28,15 +28,15 @@ body
 }
 #enemy1
 {
-  /*position: absolute;*/
-  /*right: 100px;*/
-  /*bottom: 0px;*/
+  left: 90px;
 }
 #enemy2
 {
-  /*position: absolute;*/
-  right: 100px;
-  /*bottom: 0px;*/
+  right: 0px;
+}
+#enemy3
+{
+  right: 500px;
 }
 .enemyLife
 {
@@ -50,21 +50,6 @@ body
   width: 50px;
   height: 70px;
   background-color: grey;
-  background: url(images/stickRight.png) no-repeat center center;
-  background-size: 100%;
-}
-#enemy2Life
-{
-  width: 50px;
-  height: 10px;
-  background-color: red;
-  margin-bottom: 5px;
-}
-#enemy2Image
-{
-  width: 50px;
-  height: 70px;
-  background-color: grey;
-  background: url(images/stickRight.png) no-repeat center center;
-  background-size: 100%;
+  background: url(images/stick.png) no-repeat center center;
+  /*background-size: 100%;*/
 }

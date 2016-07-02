@@ -25,24 +25,44 @@ window.setInterval(function()
   var test = $(".bullet")
   if (test.length)
   {
-    $(".enemy").each(function()
+    $(".bullet").each(function()
     {
-      // console.log(collision($(this), $('.bullet')));
-      var x = collision($(this), $('.bullet'));
-      if (x)
+      var hit = false;
+      $(".enemy").each(function()
       {
-        console.log($(this));
-        console.log($(this).children(".enemyLife"));
-        $(this).children(".enemyLife").width("-=10px");
-        if (!$(this).children(".enemyLife").width())
+        // console.log(collision($(this), $('.bullet')));
+        // var x = collision($(this), $('.bullet'));
+        var x = collision($(this), test);
+        if (x)
         {
-          // $(this).effect("explode");
-          $(this).remove();
+          hit = true;
+          // console.log($(this));
+          // console.log($(this).children(".enemyLife"));
+          $(this).children(".enemyLife").width("-=10px");
+          if (!$(this).children(".enemyLife").width())
+          {
+            // $(this).effect("explode");
+            $(this).children(".enemyImage").css("background-image", "url(images/explosion.png)");
+            $(this).children(".enemyImage").css("background-size", "100%");
+            // console.log("1");
+            var me = $(this);
+            var wait = setTimeout(function()
+            {
+              // console.log("2");
+              me.remove();
+            }, 100);
+            // console.log("3");
+          }
         }
+      });
+      if(hit)
+      {
+        $(this).remove();
+        hit = false;
       }
     });
   }
-}, 40);
+}, 10);
 
 $(document).ready(function()
 {
@@ -66,7 +86,7 @@ $(document).ready(function()
   var intRight;
   var intLeft;
   var intShoot;
-  var shootSpeed = 100;
+  var shootSpeed = 50;
   player.css("top", vert+"px");
   // $("#enemy").draggable();
   $(document).keydown(function(e)
