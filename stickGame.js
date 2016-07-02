@@ -1,5 +1,4 @@
 var down = [];
-var enemies = [];
 function collision($div1, $div2)
 {
   var x1 = $div1.offset().left;
@@ -26,30 +25,31 @@ window.setInterval(function()
   var test = $(".bullet")
   if (test.length)
   {
-    for (var i = 0; i < enemies.length; i++)
+    $(".enemy").each(function()
     {
-      var x = collision(enemies[i].enemy, $('.bullet'));
+      // console.log(collision($(this), $('.bullet')));
+      var x = collision($(this), $('.bullet'));
       if (x)
       {
-        // console.log(enemies[i]);
-        enemies[i].life.width("-=10px");
-        if (!enemies[i].life.width())
+        console.log($(this));
+        console.log($(this).children(".enemyLife"));
+        $(this).children(".enemyLife").width("-=10px");
+        if (!$(this).children(".enemyLife").width())
         {
-          enemies[i].enemy.effect("explode");
-          enemies[i].enemy.remove();
-          // enemies.
+          // $(this).effect("explode");
+          $(this).remove();
         }
       }
-    }
+    });
   }
 }, 40);
 
 $(document).ready(function()
 {
-  var enemy1 = {enemy:$("#enemy1"), life:$("#enemy1Life")};
-  var enemy2 = {enemy:$("#enemy2"), life:$("#enemy2Life")};
-  enemies.push(enemy1);
-  enemies.push(enemy2);
+  // var enemy1 = {enemy:$("#enemy1"), life:$("#enemy1Life")};
+  // var enemy2 = {enemy:$("#enemy2"), life:$("#enemy2Life")};
+  // enemies.push(enemy1);
+  // enemies.push(enemy2);
   var gameScreen = $("#gameScreen");
   var gameScreenPosition = gameScreen.get(0).getBoundingClientRect();
   var player = $("#player");
@@ -66,7 +66,7 @@ $(document).ready(function()
   var intRight;
   var intLeft;
   var intShoot;
-  var shootSpeed = 50;
+  var shootSpeed = 100;
   player.css("top", vert+"px");
   // $("#enemy").draggable();
   $(document).keydown(function(e)

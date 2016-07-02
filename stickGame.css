@@ -21,25 +21,31 @@ body
   /*background-size: cover;*/
   /*background-size: contain;*/
 }
-#enemy1
+.enemy
 {
   position: absolute;
   bottom: 0px;
+}
+#enemy1
+{
+  /*position: absolute;*/
+  /*right: 100px;*/
+  /*bottom: 0px;*/
 }
 #enemy2
 {
-  position: absolute;
+  /*position: absolute;*/
   right: 100px;
-  bottom: 0px;
+  /*bottom: 0px;*/
 }
-#enemy1Life
+.enemyLife
 {
   width: 50px;
   height: 10px;
   background-color: red;
   margin-bottom: 5px;
 }
-#enemy1Image
+.enemyImage
 {
   width: 50px;
   height: 70px;
