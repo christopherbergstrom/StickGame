@@ -7,8 +7,8 @@ Menu.prototype.start = function()
     upgradeMenu.remove();
   }
   $("#gameScreen").append("<div id='upgradeMenu'></div>");
-  $("#upgradeMenu").append("<div id='start'>Start</div>")
-  $("#upgradeMenu").append("<div id='instructions'>Instructions</div>")
+  $("#upgradeMenu").append("<div id='start' class='item'>Start</div>")
+  $("#upgradeMenu").append("<div id='instructions' class='item'>Instructions</div>")
 }
 Menu.prototype.removeStart = function()
 {
@@ -22,11 +22,11 @@ Menu.prototype.upgrade = function()
     upgradeMenu.remove();
   }
   $("#gameScreen").append("<div id='upgradeMenu'></div>");
-  $("#upgradeMenu").append("<div id='handgun'>9mm</div>")
-  $("#upgradeMenu").append("<div id='shotgun'>Shotgun 20,000</div>")
-  $("#upgradeMenu").append("<div id='sniper'>Sniper rifle 60,000</div>")
-  $("#upgradeMenu").append("<div id='minigun'>Minigun 100,000</div>")
-  $("#upgradeMenu").append("<div id='done'>Done</div>")
+  $("#upgradeMenu").append("<div id='handgun' class='item'>9mm</div>")
+  $("#upgradeMenu").append("<div id='shotgun' class='item'>Shotgun 20,000</div>")
+  $("#upgradeMenu").append("<div id='sniper' class='item'>Sniper rifle 60,000</div>")
+  $("#upgradeMenu").append("<div id='minigun' class='item'>Minigun 100,000</div>")
+  $("#upgradeMenu").append("<div id='done' class='item'>Done</div>")
 }
 Menu.prototype.removeUpgrade = function()
 {

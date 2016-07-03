@@ -13,9 +13,31 @@ body
 #upgradeMenu
 {
   position: absolute;
-  width: 500px;
-  height: 250px;
-  margin: auto;
+  left: 50px;
+  top: 10px;
+  font-size: 2em;
+}
+.item
+{
+  padding: 10px;
+  background: white; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(white, #d9d9d9, white); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(white, #d9d9d9, white); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(white, #d9d9d9, white); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(white, #d9d9d9, white); /* Standard syntax */
+}
+.item:hover
+{
+  cursor: pointer;
+  background: white; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(white, #b3b3b3, white); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(white, #b3b3b3, white); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(white, #b3b3b3, white); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(white, #b3b3b3, white); /* Standard syntax */
+}
+#money
+{
+  
 }
 #player
 {
@@ -27,6 +49,7 @@ body
   background-size: 100%;
   /*background-size: cover;*/
   /*background-size: contain;*/
+  z-index: 1000;
 }
 .enemy
 {
