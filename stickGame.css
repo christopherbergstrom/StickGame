@@ -10,6 +10,13 @@ body
   height: 500px;
   background-color: white;
 }
+#upgradeMenu
+{
+  position: absolute;
+  width: 500px;
+  height: 250px;
+  margin: auto;
+}
 #player
 {
   position: absolute;

@@ -1,84 +1,53 @@
 var down = [];
-function collision($div1, $div2)
-{
-  var x1 = $div1.offset().left;
-  var y1 = $div1.offset().top;
-  var h1 = $div1.outerHeight(true);
-  var w1 = $div1.outerWidth(true);
-  var b1 = y1 + h1;
-  var r1 = x1 + w1;
-  var x2 = $div2.offset().left;
-  var y2 = $div2.offset().top;
-  var h2 = $div2.outerHeight(true);
-  var w2 = $div2.outerWidth(true);
-  var b2 = y2 + h2;
-  var r2 = x2 + w2;
-
-  if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
-  return true;
-}
-
-
-window.setInterval(function()
-{
-  // $('#result').text(collision($('#enemy'), $('.bullet')));
-  var bullet = $(".bullet")
-  // tests if a bullet is on the screen
-  if (bullet.length)
-  {
-    // runs this loop for each bullet for each enemy
-    // if bullet hits enemy, enemy is damaged and bullet is removed
-    $(".bullet").each(function()
-    {
-      var hit = false;
-      $(".enemy").each(function()
-      {
-        var x = collision($(this), bullet);
-        if (x)
-        {
-          hit = true;
-          $(this).children(".enemyLife").width("-=10px");
-          if (!$(this).children(".enemyLife").width())
-          {
-            $(this).children(".enemyImage").css("background-image", "url(images/explosion.png)");
-            $(this).children(".enemyImage").css("background-size", "180%");
-            var me = $(this);
-            var wait = setTimeout(function()
-            {
-              me.remove();
-            }, 200);
-          }
-        }
-      });
-      if(hit)
-      {
-        $(this).remove();
-        hit = false;
-      }
-    });
-  }
-}, 10);
+var menu = new Menu();
+var gameScreen;
+// var gameScreenPosition;
+var player;
+// var playerPosition;
+var shootSpeed = 500;
 
 $(document).ready(function()
 {
-  var gameScreen = $("#gameScreen");
-  var gameScreenPosition = gameScreen.get(0).getBoundingClientRect();
-  var player = $("#player");
-  var playerPosition = player.get(0).getBoundingClientRect();
+  gameScreen = $("#gameScreen");
+  // gameScreenPosition = gameScreen.get(0).getBoundingClientRect();
+  menu.start();
+  $("#start").click(function()
+  {
+    console.log("start");
+    menu.removeStart();
+    createGame();
+  });
+  $("#instructions").click(function()
+  {
+    console.log("put instructions here");
+  });
+});
+
+function createGame()
+{
+  gameScreen.append("<div id='player'></div>")
+  playGame();
+}
+function playGame()
+{
+  gameScreen.append("<div id='enemy3' class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>")
+  player = $("#player");
+  // playerPosition = player.get(0).getBoundingClientRect();
   var moveRight = true;
   var moveLeft = false;
   var right = true;
   var left = true;
   var jump = true;
   var shoot = true;
-  var hor = 0;
+  var hor = 500;
   var lowest = 380;
   var vert = lowest;
   var intRight;
   var intLeft;
   var intShoot;
-  var shootSpeed = 500;
   player.css("top", vert+"px");
+  player.css("left", hor+"px");
+  check();
   $(document).keydown(function(e)
   {
     down[e.which] = true;
@@ -336,4 +305,79 @@ $(document).ready(function()
       }
     }
   });
-});
+}
+
+function collision($div1, $div2)
+{
+  var x1 = $div1.offset().left;
+  var y1 = $div1.offset().top;
+  var h1 = $div1.outerHeight(true);
+  var w1 = $div1.outerWidth(true);
+  var b1 = y1 + h1;
+  var r1 = x1 + w1;
+  var x2 = $div2.offset().left;
+  var y2 = $div2.offset().top;
+  var h2 = $div2.outerHeight(true);
+  var w2 = $div2.outerWidth(true);
+  var b2 = y2 + h2;
+  var r2 = x2 + w2;
+
+  if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+  return true;
+}
+
+// window.setInterval(function()
+function check()
+{
+  var checking = setInterval(function()
+  {
+    // $('#result').text(collision($('#enemy'), $('.bullet')));
+    var bullet = $(".bullet")
+    var enemy = $(".enemy");
+    if (!enemy.length)
+    {
+      clearInterval(checking);
+      menu.upgrade();
+      $("#done").click(function()
+      {
+        console.log("done upgrading");
+        menu.removeUpgrade();
+        playGame();
+      });
+    }
+    // tests if a bullet is on the screen
+    if (bullet.length)
+    {
+      // runs this loop for each bullet for each enemy
+      // if bullet hits enemy, enemy is damaged and bullet is removed
+      $(".bullet").each(function()
+      {
+        var hit = false;
+        $(".enemy").each(function()
+        {
+          var x = collision($(this), bullet);
+          if (x)
+          {
+            hit = true;
+            $(this).children(".enemyLife").width("-=10px");
+            if (!$(this).children(".enemyLife").width())
+            {
+              $(this).children(".enemyImage").css("background-image", "url(images/explosion.png)");
+              $(this).children(".enemyImage").css("background-size", "180%");
+              var me = $(this);
+              var wait = setTimeout(function()
+              {
+                me.remove();
+              }, 200);
+            }
+          }
+        });
+        if(hit)
+        {
+          $(this).remove();
+          hit = false;
+        }
+      });
+    }
+  }, 10);
+}
