@@ -22,6 +22,7 @@ Menu.prototype.upgrade = function()
     upgradeMenu.remove();
   }
   $("#gameScreen").append("<div id='upgradeMenu'></div>");
+  $("#upgradeMenu").append("<div id='handgun'>9mm</div>")
   $("#upgradeMenu").append("<div id='shotgun'>Shotgun 20,000</div>")
   $("#upgradeMenu").append("<div id='sniper'>Sniper rifle 60,000</div>")
   $("#upgradeMenu").append("<div id='minigun'>Minigun 100,000</div>")

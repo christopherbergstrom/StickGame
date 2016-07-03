@@ -6,6 +6,19 @@ var player;
 // var playerPosition;
 var shootSpeed = 500;
 
+var moveRight = true;
+var moveLeft = false;
+var right = true;
+var left = true;
+var jump = true;
+var shoot = true;
+var hor = 500;
+var lowest = 380;
+var vert = lowest;
+var intRight;
+var intLeft;
+var intShoot;
+
 $(document).ready(function()
 {
   gameScreen = $("#gameScreen");
@@ -13,7 +26,6 @@ $(document).ready(function()
   menu.start();
   $("#start").click(function()
   {
-    console.log("start");
     menu.removeStart();
     createGame();
   });
@@ -26,25 +38,12 @@ $(document).ready(function()
 function createGame()
 {
   gameScreen.append("<div id='player'></div>")
+  player = $("#player");
   playGame();
 }
 function playGame()
 {
   gameScreen.append("<div id='enemy3' class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>")
-  player = $("#player");
-  // playerPosition = player.get(0).getBoundingClientRect();
-  var moveRight = true;
-  var moveLeft = false;
-  var right = true;
-  var left = true;
-  var jump = true;
-  var shoot = true;
-  var hor = 500;
-  var lowest = 380;
-  var vert = lowest;
-  var intRight;
-  var intLeft;
-  var intShoot;
   player.css("top", vert+"px");
   player.css("left", hor+"px");
   check();
