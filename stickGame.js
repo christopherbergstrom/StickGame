@@ -1,11 +1,8 @@
 var down = [];
+var inventory = [true, false, false, false];
 var menu = new Menu();
 var gameScreen;
-// var gameScreenPosition;
 var player;
-// var playerPosition;
-var shootSpeed = 500;
-
 var moveRight = true;
 var moveLeft = false;
 var right = true;
@@ -18,11 +15,12 @@ var vert = lowest;
 var intRight;
 var intLeft;
 var intShoot;
-
+var shootSpeed = 500;
+var shootPower = 5;
+var money = 1000000;
 $(document).ready(function()
 {
   gameScreen = $("#gameScreen");
-  // gameScreenPosition = gameScreen.get(0).getBoundingClientRect();
   menu.start();
   $("#start").click(function()
   {
@@ -39,6 +37,7 @@ function createGame()
 {
   gameScreen.append("<div id='player'></div>")
   player = $("#player");
+  gameScreen.append("<div id='money'>$0</div>")
   playGame();
 }
 function playGame()
@@ -54,7 +53,6 @@ function playGame()
     // right
     if (down[39] && right)
     {
-      // console.log("right");
       right = false;
       moveRight = true;
       moveLeft = false;
@@ -73,7 +71,6 @@ function playGame()
     // left
     if (down[37] && left)
     {
-      // console.log("left");
       left = false;
       moveRight = false;
       moveLeft = true;
@@ -92,7 +89,6 @@ function playGame()
     // jump
     if (down[38] && jump)
     {
-      // console.log("jump");
       jump = false;
       var upInterval1 = setInterval(function()
       {
@@ -158,7 +154,6 @@ function playGame()
     // shoot
     if (down[32] && shoot)
     {
-      // console.log("shoot");
       // click space bar
       shoot = false;
       var bullet = $("<div></div>");
@@ -325,21 +320,53 @@ function collision($div1, $div2)
   return true;
 }
 
-// window.setInterval(function()
 function check()
 {
   var checking = setInterval(function()
   {
-    // $('#result').text(collision($('#enemy'), $('.bullet')));
     var bullet = $(".bullet")
     var enemy = $(".enemy");
     if (!enemy.length)
     {
       clearInterval(checking);
-      menu.upgrade();
+      menu.upgrade(inventory);
+      $("#handgun").click(function()
+      {
+        inventory[0] = true;
+      });
+      $("#shotgun").click(function()
+      {
+        if (money - 20000 >= 0 && !inventory[1])
+        {
+          inventory[1] = true;
+          money -= 20000;
+          $("#shotgun").html("Shotgun");
+          $("#money").html("$"+money);
+        }
+      });
+      $("#sniper").click(function()
+      {
+        if (money - 60000 >= 0 && !inventory[2])
+        {
+          inventory[2] = true;
+          money -= 60000;
+          $("#sniper").html("Sniper");
+          $("#money").html("$"+money);
+        }
+      });
+      $("#minigun").click(function()
+      {
+        if (money - 100000 >= 0 && !inventory[3])
+        {
+          inventory[3] = true;
+          money -= 100000;
+          $("#minigun").html("Minigun");
+          $("#money").html("$"+money);
+        }
+      });
       $("#done").click(function()
       {
-        console.log("done upgrading");
+        console.log(inventory);
         menu.removeUpgrade();
         playGame();
       });
@@ -358,9 +385,11 @@ function check()
           if (x)
           {
             hit = true;
-            $(this).children(".enemyLife").width("-=10px");
+            $(this).children(".enemyLife").width("-="+shootPower+"px");
             if (!$(this).children(".enemyLife").width())
             {
+              money+=100;
+              $("#money").html("$"+money);
               $(this).children(".enemyImage").css("background-image", "url(images/explosion.png)");
               $(this).children(".enemyImage").css("background-size", "180%");
               var me = $(this);

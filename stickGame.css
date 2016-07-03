@@ -20,6 +20,7 @@ body
 .item
 {
   padding: 10px;
+  text-align: center;
   background: white; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(white, #d9d9d9, white); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(white, #d9d9d9, white); /* For Opera 11.1 to 12.0 */
@@ -37,7 +38,10 @@ body
 }
 #money
 {
-  
+  position: absolute;
+  right: 50px;
+  top: 10px;
+  font-size: 2em;
 }
 #player
 {
