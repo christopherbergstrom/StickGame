@@ -19,6 +19,8 @@ var shootSpeed = 500;
 var shootPower = 5;
 var money = 1000000;
 var health = 5000;
+var score = 0;
+var level = 0;
 $(document).ready(function()
 {
   gameScreen = $("#gameScreen");
@@ -51,7 +53,9 @@ function createGame()
 }
 function playGame()
 {
-  gameScreen.append("<div id='enemy3' class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>")
+  level++;
+  score += 1000;
+  makeEnemies(level);
   player.css("top", vert+"px");
   player.css("left", hor+"px");
   check();
@@ -432,6 +436,7 @@ function check()
             if (!$(this).children(".enemyLife").width())
             {
               money+=100;
+              score+=100;
               $("#money").html("$"+money);
               $(this).remove();
               // $(this).children(".enemyImage").css("background-image", "url(images/explosion.png)");
@@ -473,7 +478,22 @@ function check()
     }
   }, 10);
 }
+function makeEnemies(level)
+{
+  for (var i = 0; i < level; i++)
+  {
+    var enemy = "<div id='enemy3' class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>"
+    gameScreen.append(enemy);
+    // console.log(enemy);
+    follow(enemy);
+  }
+}
+function follow(enemy)
+{
+  console.log(enemy.left);
+}
 function gameOver()
 {
   console.log("game over!");
+  // display final score
 }

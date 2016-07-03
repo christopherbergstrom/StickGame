@@ -13,11 +13,9 @@ Menu.prototype.start = function()
 Menu.prototype.removeStart = function()
 {
   $("#upgradeMenu").remove();
-  console.log("1");
   var instructionsText = $("#instructionsText");
   if (instructionsText)
   {
-    console.log("2");
     instructionsText.remove();
   }
 }

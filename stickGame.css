@@ -37,6 +37,13 @@ body
   background: -moz-linear-gradient(white, #b3b3b3, white); /* For Firefox 3.6 to 15 */
   background: linear-gradient(white, #b3b3b3, white); /* Standard syntax */
 }
+#score
+{
+  position: absolute;
+  right: 50px;
+  top: 10px;
+  font-size: 2em;
+}
 #money
 {
   position: absolute;
