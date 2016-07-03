@@ -43,6 +43,14 @@ body
   top: 10px;
   font-size: 2em;
 }
+#instructionsText
+{
+  position: absolute;
+  width: 600px;
+  right: 50px;
+  top: 10px;
+  font-size: 2em;
+}
 #player
 {
   position: absolute;

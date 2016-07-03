@@ -29,7 +29,12 @@ $(document).ready(function()
   });
   $("#instructions").click(function()
   {
-    console.log("put instructions here");
+    var instructionsText = $("#instructionsText");
+    if (instructionsText)
+    {
+      instructionsText.remove();
+    }
+    gameScreen.append("<div id='instructionsText'>Use the arrow keys to move and the space bar to shoot. Kill enemies to earn money and buy new guns.</div>")
   });
 });
 
@@ -333,6 +338,8 @@ function check()
       $("#handgun").click(function()
       {
         inventory[0] = true;
+        shootSpeed = 500;
+        shootPower = 5;
       });
       $("#shotgun").click(function()
       {
@@ -342,6 +349,13 @@ function check()
           money -= 20000;
           $("#shotgun").html("Shotgun");
           $("#money").html("$"+money);
+          shootSpeed = 1000;
+          shootPower = 10;
+        }
+        else if (inventory[1])
+        {
+          shootSpeed = 1000;
+          shootPower = 10;
         }
       });
       $("#sniper").click(function()
@@ -352,6 +366,13 @@ function check()
           money -= 60000;
           $("#sniper").html("Sniper");
           $("#money").html("$"+money);
+          shootSpeed = 1500;
+          shootPower = 20;
+        }
+        else if (inventory[2])
+        {
+          shootSpeed = 1500;
+          shootPower = 20;
         }
       });
       $("#minigun").click(function()
@@ -362,6 +383,13 @@ function check()
           money -= 100000;
           $("#minigun").html("Minigun");
           $("#money").html("$"+money);
+          shootSpeed = 100;
+          shootPower = 5;
+        }
+        else if (inventory[3])
+        {
+          shootSpeed = 100;
+          shootPower = 5;
         }
       });
       $("#done").click(function()
@@ -369,6 +397,7 @@ function check()
         console.log(inventory);
         menu.removeUpgrade();
         playGame();
+        // put create enemies function loop call here
       });
     }
     // tests if a bullet is on the screen
@@ -390,13 +419,15 @@ function check()
             {
               money+=100;
               $("#money").html("$"+money);
-              $(this).children(".enemyImage").css("background-image", "url(images/explosion.png)");
-              $(this).children(".enemyImage").css("background-size", "180%");
-              var me = $(this);
-              var wait = setTimeout(function()
-              {
-                me.remove();
-              }, 200);
+              $(this).remove();
+              // $(this).children(".enemyImage").css("background-image", "url(images/explosion.png)");
+              // $(this).children(".enemyImage").css("background-size", "180%");
+              // var me = $(this);
+              // me.removeClass("enemy");
+              // var wait = setTimeout(function()
+              // {
+              //   me.remove();
+              // }, 200);
             }
           }
         });
