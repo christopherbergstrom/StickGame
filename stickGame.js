@@ -18,6 +18,7 @@ var intShoot;
 var shootSpeed = 500;
 var shootPower = 5;
 var money = 1000000;
+var health = 5000;
 $(document).ready(function()
 {
   gameScreen = $("#gameScreen");
@@ -43,6 +44,9 @@ function createGame()
   gameScreen.append("<div id='player'></div>")
   player = $("#player");
   gameScreen.append("<div id='money'>$0</div>")
+  gameScreen.append("<div id='healthDiv'></div>")
+  $("#healthDiv").append("<div id='healthImage'></div>")
+  $("#healthDiv").append("<div id='health'>5000</div>")
   playGame();
 }
 function playGame()
@@ -335,6 +339,16 @@ function check()
     {
       clearInterval(checking);
       menu.upgrade(inventory);
+      $("#healthAdd").click(function()
+      {
+        if (money - 1000 >= 0)
+        {
+          money -= 1000;
+          health += 100;
+          $("#health").html(health);
+          $("#money").html("$"+money);
+        }
+      });
       $("#handgun").click(function()
       {
         inventory[0] = true;
@@ -438,5 +452,28 @@ function check()
         }
       });
     }
+    if (enemy.length)
+    {
+      // runs this loop for each enemy
+      // if enemy touches player, player is damaged
+      $(".enemy").each(function()
+      {
+        var x = collision($(this), player);
+        if (x)
+        {
+          health-=1;
+          $("#health").html(health);
+          if (health <= 0)
+          {
+            player.remove();
+            gameOver();
+          }
+        }
+      });
+    }
   }, 10);
+}
+function gameOver()
+{
+  console.log("game over!");
 }

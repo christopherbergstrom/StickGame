@@ -33,6 +33,7 @@ Menu.prototype.upgrade = function(inventory)
 
   }
   $("#gameScreen").append("<div id='upgradeMenu'></div>");
+  $("#upgradeMenu").append("<div id='healthAdd' class='item'>100 health</div>")
   $("#upgradeMenu").append("<div id='handgun' class='item'>9mm</div>")
   if (inventory[1])
   {

@@ -19,6 +19,7 @@ body
 }
 .item
 {
+  /*display: inline-block;*/
   padding: 10px;
   text-align: center;
   background: white; /* For browsers that do not support gradients */
@@ -42,6 +43,33 @@ body
   right: 50px;
   top: 10px;
   font-size: 2em;
+}
+#healthDiv
+{
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  font-size: 2em;
+}
+#healthImage
+{
+  /*position: absolute;*/
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  /*right: 120px;*/
+  /*top: 50px;*/
+  /*font-size: 2em;*/
+  background: url(images/heart.png) no-repeat center center;
+  background-size: 100%;
+}
+#health
+{
+  display: inline-block;
+  /*position: absolute;
+  right: 50px;
+  top: 50px;
+  font-size: 2em;*/
 }
 #instructionsText
 {
@@ -70,7 +98,7 @@ body
 }
 #enemy1
 {
-  left: 90px;
+  left: 150px;
 }
 #enemy2
 {
@@ -78,7 +106,7 @@ body
 }
 #enemy3
 {
-  right: 500px;
+  right: 600px;
 }
 .enemyLife
 {
