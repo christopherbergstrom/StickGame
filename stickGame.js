@@ -21,6 +21,7 @@ var money = 1000000;
 var health = 5000;
 var score = 0;
 var level = 0;
+var enemies = 0;
 $(document).ready(function()
 {
   gameScreen = $("#gameScreen");
@@ -339,7 +340,7 @@ function check()
   {
     var bullet = $(".bullet")
     var enemy = $(".enemy");
-    if (!enemy.length)
+    if (enemies === 0)
     {
       clearInterval(checking);
       menu.upgrade(inventory);
@@ -412,7 +413,7 @@ function check()
       });
       $("#done").click(function()
       {
-        console.log(inventory);
+        // console.log(inventory);
         menu.removeUpgrade();
         playGame();
         // put create enemies function loop call here
@@ -437,6 +438,7 @@ function check()
             {
               money+=100;
               score+=100;
+              enemies--;
               $("#money").html("$"+money);
               $(this).remove();
               // $(this).children(".enemyImage").css("background-image", "url(images/explosion.png)");
@@ -482,15 +484,28 @@ function makeEnemies(level)
 {
   for (var i = 0; i < level; i++)
   {
-    var enemy = "<div id='enemy3' class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>"
+    enemies++;
+    var enemy = "<div class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>";
     gameScreen.append(enemy);
-    // console.log(enemy);
-    follow(enemy);
   }
+  var count = 1;
+  $(".enemy").each(function()
+  {
+    if (count % 2 === 0)
+    {
+      $(this).css("left", "0px");
+    }
+    else
+    {
+      $(this).css("right", "0px");
+    }
+    follow($(this));
+    count++;
+  });
 }
 function follow(enemy)
 {
-  console.log(enemy.left);
+  console.log(enemy.position().left);
 }
 function gameOver()
 {

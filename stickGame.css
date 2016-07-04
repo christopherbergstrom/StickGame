@@ -103,7 +103,7 @@ body
   position: absolute;
   bottom: 0px;
 }
-#enemy1
+/*#enemy1
 {
   left: 150px;
 }
@@ -114,7 +114,7 @@ body
 #enemy3
 {
   right: 600px;
-}
+}*/
 .enemyLife
 {
   width: 50px;
