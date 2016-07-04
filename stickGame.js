@@ -340,85 +340,6 @@ function check()
   {
     var bullet = $(".bullet")
     var enemy = $(".enemy");
-    if (enemies === 0)
-    {
-      clearInterval(checking);
-      menu.upgrade(inventory);
-      $("#healthAdd").click(function()
-      {
-        if (money - 1000 >= 0)
-        {
-          money -= 1000;
-          health += 100;
-          $("#health").html(health);
-          $("#money").html("$"+money);
-        }
-      });
-      $("#handgun").click(function()
-      {
-        inventory[0] = true;
-        shootSpeed = 500;
-        shootPower = 5;
-      });
-      $("#shotgun").click(function()
-      {
-        if (money - 20000 >= 0 && !inventory[1])
-        {
-          inventory[1] = true;
-          money -= 20000;
-          $("#shotgun").html("Shotgun");
-          $("#money").html("$"+money);
-          shootSpeed = 1000;
-          shootPower = 10;
-        }
-        else if (inventory[1])
-        {
-          shootSpeed = 1000;
-          shootPower = 10;
-        }
-      });
-      $("#sniper").click(function()
-      {
-        if (money - 60000 >= 0 && !inventory[2])
-        {
-          inventory[2] = true;
-          money -= 60000;
-          $("#sniper").html("Sniper");
-          $("#money").html("$"+money);
-          shootSpeed = 1500;
-          shootPower = 20;
-        }
-        else if (inventory[2])
-        {
-          shootSpeed = 1500;
-          shootPower = 20;
-        }
-      });
-      $("#minigun").click(function()
-      {
-        if (money - 100000 >= 0 && !inventory[3])
-        {
-          inventory[3] = true;
-          money -= 100000;
-          $("#minigun").html("Minigun");
-          $("#money").html("$"+money);
-          shootSpeed = 100;
-          shootPower = 5;
-        }
-        else if (inventory[3])
-        {
-          shootSpeed = 100;
-          shootPower = 5;
-        }
-      });
-      $("#done").click(function()
-      {
-        // console.log(inventory);
-        menu.removeUpgrade();
-        playGame();
-        // put create enemies function loop call here
-      });
-    }
     // tests if a bullet is on the screen
     if (bullet.length)
     {
@@ -480,28 +401,157 @@ function check()
     }
   }, 10);
 }
+function enemiesLeft()
+{
+  if (enemies === 0)
+  {
+    menu.upgrade(inventory);
+    $("#healthAdd").click(function()
+    {
+      if (money - 1000 >= 0)
+      {
+        money -= 1000;
+        health += 100;
+        $("#health").html(health);
+        $("#money").html("$"+money);
+      }
+    });
+    $("#handgun").click(function()
+    {
+      inventory[0] = true;
+      shootSpeed = 500;
+      shootPower = 5;
+    });
+    $("#shotgun").click(function()
+    {
+      if (money - 20000 >= 0 && !inventory[1])
+      {
+        inventory[1] = true;
+        money -= 20000;
+        $("#shotgun").html("Shotgun");
+        $("#money").html("$"+money);
+        shootSpeed = 1000;
+        shootPower = 10;
+      }
+      else if (inventory[1])
+      {
+        shootSpeed = 1000;
+        shootPower = 10;
+      }
+    });
+    $("#sniper").click(function()
+    {
+      if (money - 60000 >= 0 && !inventory[2])
+      {
+        inventory[2] = true;
+        money -= 60000;
+        $("#sniper").html("Sniper");
+        $("#money").html("$"+money);
+        shootSpeed = 1500;
+        shootPower = 20;
+      }
+      else if (inventory[2])
+      {
+        shootSpeed = 1500;
+        shootPower = 20;
+      }
+    });
+    $("#minigun").click(function()
+    {
+      if (money - 100000 >= 0 && !inventory[3])
+      {
+        inventory[3] = true;
+        money -= 100000;
+        $("#minigun").html("Minigun");
+        $("#money").html("$"+money);
+        shootSpeed = 100;
+        shootPower = 5;
+      }
+      else if (inventory[3])
+      {
+        shootSpeed = 100;
+        shootPower = 5;
+      }
+    });
+    $("#done").click(function()
+    {
+      // console.log(inventory);
+      menu.removeUpgrade();
+      playGame();
+      // put create enemies function loop call here
+    });
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
 function makeEnemies(level)
 {
-  for (var i = 0; i < level; i++)
+  var count = 1;
+  var newEnemy = setInterval(function()
   {
     enemies++;
-    var enemy = "<div class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>";
-    gameScreen.append(enemy);
-  }
-  var count = 1;
-  $(".enemy").each(function()
+    // var $(enemy) = new Enemy();
+    var enemy = new Enemy();
+    // gameScreen.append($(enemy).me);
+    gameScreen.append(enemy.me);
+    // gameScreen.append(enemy);
+    // if (count % 2 === 0)
+    // {
+    //   $(enemy).css("left", "0px");
+    // }
+    // else
+    // {
+    //   $(enemy).css("left", "950px");
+    // }
+    // var enemy = "<div class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>";
+  }, 500);
+  var wait = setTimeout(function()
   {
-    if (count % 2 === 0)
+    clearInterval(newEnemy);
+    $(".enemy").each(function()
     {
-      $(this).css("left", "0px");
-    }
-    else
+      console.log("here");
+      if (count % 2 === 0)
+      {
+        $(this).css("left", "0px");
+      }
+      else
+      {
+        $(this).css("left", "950px");
+      }
+      // gameScreen.append($(this));
+      // $(this).follow();
+      // follow($(this));
+      count++;
+    });
+    var checking = setInterval(function()
     {
-      $(this).css("left", "950px");
-    }
-    follow($(this));
-    count++;
-  });
+      var x = enemiesLeft();
+      if (x)
+      {
+        clearInterval(checking);
+      }
+    }, 500);
+  }, level*500);
+  // $(".enemy").each(function()
+  // {
+  //   console.log("here");
+  //   if (count % 2 === 0)
+  //   {
+  //     $(this).css("left", "0px");
+  //   }
+  //   else
+  //   {
+  //     $(this).css("left", "950px");
+  //   }
+  //   // gameScreen.append($(this));
+  //   // $(this).follow();
+  //   // follow($(this));
+  //   count++;
+  // });
 }
 function follow(enemy)
 {

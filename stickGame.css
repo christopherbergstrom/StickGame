@@ -60,23 +60,15 @@ body
 }
 #healthImage
 {
-  /*position: absolute;*/
   display: inline-block;
   width: 30px;
   height: 30px;
-  /*right: 120px;*/
-  /*top: 50px;*/
-  /*font-size: 2em;*/
   background: url(images/heart.png) no-repeat center center;
   background-size: 100%;
 }
 #health
 {
   display: inline-block;
-  /*position: absolute;
-  right: 50px;
-  top: 50px;
-  font-size: 2em;*/
 }
 #instructionsText
 {
@@ -94,8 +86,6 @@ body
   background-color: black;
   background: url(images/stickRight.png) no-repeat center center;
   background-size: 100%;
-  /*background-size: cover;*/
-  /*background-size: contain;*/
   z-index: 1000;
 }
 .enemy
@@ -103,18 +93,6 @@ body
   position: absolute;
   bottom: 0px;
 }
-/*#enemy1
-{
-  left: 150px;
-}
-#enemy2
-{
-  right: 0px;
-}
-#enemy3
-{
-  right: 600px;
-}*/
 .enemyLife
 {
   width: 50px;
