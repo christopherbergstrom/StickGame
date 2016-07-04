@@ -489,44 +489,47 @@ function enemiesLeft()
 }
 function makeEnemies(level)
 {
-  var count = 1;
   var newEnemy = setInterval(function()
   {
+    var count = 1;
     enemies++;
-    // var $(enemy) = new Enemy();
-    var enemy = new Enemy();
-    // gameScreen.append($(enemy).me);
-    gameScreen.append(enemy.me);
-    // gameScreen.append(enemy);
-    // if (count % 2 === 0)
-    // {
-    //   $(enemy).css("left", "0px");
-    // }
-    // else
-    // {
-    //   $(enemy).css("left", "950px");
-    // }
-    // var enemy = "<div class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>";
-  }, 500);
-  var wait = setTimeout(function()
-  {
-    clearInterval(newEnemy);
+    // var enemy = new Enemy();
+    var enemy = "<div class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>";
+    gameScreen.append(enemy);
     $(".enemy").each(function()
     {
-      console.log("here");
       if (count % 2 === 0)
       {
         $(this).css("left", "0px");
+        enemyHor = 0;
       }
       else
       {
         $(this).css("left", "950px");
+        enemyHor = 950;
       }
-      // gameScreen.append($(this));
-      // $(this).follow();
-      // follow($(this));
       count++;
     });
+  }, 500);
+  var wait = setTimeout(function()
+  {
+    clearInterval(newEnemy);
+    var enemyHor;
+        // var follow = setInterval(function()
+        // {
+        //   if (enemyHor + 50 < hor)
+        //   {
+        //     console.log("if");
+        //     enemyHor+=.5;
+        //     $(this).css("left", enemyHor+"px");
+        //   }
+        //   else if (enemyHor > hor + 70)
+        //   {
+        //     console.log("else if");
+        //     enemyHor-=.5;
+        //     $(this).css("left", enemyHor+"px");
+        //   }
+        // }, 1);
     var checking = setInterval(function()
     {
       var x = enemiesLeft();
@@ -536,26 +539,6 @@ function makeEnemies(level)
       }
     }, 500);
   }, level*500);
-  // $(".enemy").each(function()
-  // {
-  //   console.log("here");
-  //   if (count % 2 === 0)
-  //   {
-  //     $(this).css("left", "0px");
-  //   }
-  //   else
-  //   {
-  //     $(this).css("left", "950px");
-  //   }
-  //   // gameScreen.append($(this));
-  //   // $(this).follow();
-  //   // follow($(this));
-  //   count++;
-  // });
-}
-function follow(enemy)
-{
-  console.log(enemy.position().left);
 }
 function gameOver()
 {
