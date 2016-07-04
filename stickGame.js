@@ -497,7 +497,7 @@ function makeEnemies(level)
     }
     else
     {
-      $(this).css("right", "0px");
+      $(this).css("left", "950px");
     }
     follow($(this));
     count++;
