@@ -500,36 +500,38 @@ function makeEnemies(level)
     {
       if (count % 2 === 0)
       {
-        $(this).css("left", "0px");
-        enemyHor = 0;
+        // $(this).css("left", "0px");
+        move($(this), 0);
       }
       else
       {
-        $(this).css("left", "950px");
-        enemyHor = 950;
+        // $(this).css("left", "950px");
+        move($(this), 950);
       }
       count++;
+      function move(enemy, x)
+      {
+        enemy.css("transition", "10s linear");
+        if (x === 0 && enemy)
+        {
+          enemy.css("left", "950px");
+          x = 950;
+        }
+        else if (x === 950 && enemy)
+        {
+          enemy.css("left", "0px");
+          x = 0
+        }
+        var wait = setTimeout(function()
+        {
+          move(enemy, x);
+        }, 10000);
+      }
     });
   }, 500);
   var wait = setTimeout(function()
   {
     clearInterval(newEnemy);
-    var enemyHor;
-        // var follow = setInterval(function()
-        // {
-        //   if (enemyHor + 50 < hor)
-        //   {
-        //     console.log("if");
-        //     enemyHor+=.5;
-        //     $(this).css("left", enemyHor+"px");
-        //   }
-        //   else if (enemyHor > hor + 70)
-        //   {
-        //     console.log("else if");
-        //     enemyHor-=.5;
-        //     $(this).css("left", enemyHor+"px");
-        //   }
-        // }, 1);
     var checking = setInterval(function()
     {
       var x = enemiesLeft();
