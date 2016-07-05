@@ -489,42 +489,63 @@ function enemiesLeft()
 }
 function makeEnemies(level)
 {
+  var count = 1;
   var newEnemy = setInterval(function()
   {
-    var count = 1;
     enemies++;
     // var enemy = new Enemy();
     var enemy = "<div class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>";
     gameScreen.append(enemy);
     $(".enemy").each(function()
     {
+      console.log(count);
+      var enemy = $(this);
       if (count % 2 === 0)
       {
-        // $(this).css("left", "0px");
-        move($(this), 0);
+        // console.log("left 1");
+        enemy.css("left", "0px");
+        var wait = setTimeout(function()
+        {
+          move(enemy, 0);
+        }, 100);
       }
       else
       {
-        // $(this).css("left", "950px");
-        move($(this), 950);
+        // console.log("right 1");
+        enemy.css("left", "950px");
+        var wait = setTimeout(function()
+        {
+          move(enemy, 950);
+        }, 100);
       }
       count++;
       function move(enemy, x)
       {
         enemy.css("transition", "10s linear");
-        if (x === 0 && enemy)
+        if (x === 0)
         {
+          // console.log("left 2");
+          // console.log(x);
           enemy.css("left", "950px");
           x = 950;
+          // console.log(x);
         }
-        else if (x === 950 && enemy)
+        else if (x === 950)
         {
+          // console.log("right 2");
+          // console.log(x);
           enemy.css("left", "0px");
           x = 0
+          // console.log(x);
         }
         var wait = setTimeout(function()
         {
-          move(enemy, x);
+          console.log(enemy);
+          console.log(enemy.children(".enemyLife").width());
+          if (enemy.children(".enemyLife").width())
+          {
+            move(enemy, x);
+          }
         }, 10000);
       }
     });
