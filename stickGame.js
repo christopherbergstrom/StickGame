@@ -376,6 +376,7 @@ function check()
         if(hit)
         {
           $(this).remove();
+          $(this).removeClass("enemy");
           hit = false;
         }
       });
@@ -496,6 +497,7 @@ function makeEnemies(level)
     // var enemy = new Enemy();
     var enemy = "<div class='enemy'><div class='enemyLife'></div><div class='enemyImage'></div></div>";
     gameScreen.append(enemy);
+    // this is calling before enemies are done being made figure out a way to call it later
     $(".enemy").each(function()
     {
       console.log(count);
@@ -540,11 +542,15 @@ function makeEnemies(level)
         }
         var wait = setTimeout(function()
         {
-          console.log(enemy);
-          console.log(enemy.children(".enemyLife").width());
+          // console.log(enemy);
+          // console.log(enemy.children(".enemyLife").width());
           if (enemy.children(".enemyLife").width())
           {
             move(enemy, x);
+          }
+          else
+          {
+            enemy.remove();
           }
         }, 10000);
       }
